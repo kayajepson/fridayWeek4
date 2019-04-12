@@ -29,6 +29,19 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Anton', sans-serif;
 }
 
+h6 {
+  font-size: 12px;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+h3 {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+ul {
+  font-size: 25px;
+}
 
 body, html {
   height: 100%;

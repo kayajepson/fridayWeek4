@@ -10,7 +10,7 @@
     <title></title>
   </head>
   <body>
-    <div class="parallax"><center><a href="#orderHere" class="button"><button type="button" class="btn btn-outline-dark btn-lg" id="orderButton" onclick="#orderHere">ORDER NOW</button></a></div>
+    <div class="parallax"><center><a href="#orderHere" class="button"><button type="button" class="btn btn-outline-dark btn-lg" id="orderButton" onclick="#orderHere">// ORDER NOW //</button></a></div>
     <!-- <div class="jumbotron" style="height: 600px;">
       <h1 class="display-4">Lil Meeko's Pizza</h1>
       <p class="lead">------------------------------------</p>
@@ -49,6 +49,13 @@
             <div id="new-pizza-size">
               <hr>
               <h2>SELECT YOUR SIZE:</h2>
+              <h6>+$2 FOR MEDIUM // +$3 FOR LARGE</h6>
+            <div class="radio">
+              <label style="color:#ffffff;">
+                <input type="radio" name="pizzaSize" value="0">
+                Small
+              </label>
+            </div>
               <div class="radio">
                 <label style="color:#ffffff;">
                   <input type="radio" name="pizzaSize" value="2">
@@ -76,16 +83,15 @@
           <ul id="pizzas">
           </ul>
           <div id="show-pizza">
-            <p>Pizza Name: <span class="pizzaName"></span></p>
             <p>Size: <span class="pizzaSize"></span></p>
             <p>Meats: <span class="meatPrice"></span></p>
             <p>Veggies: <span class="veggiePrice"></span></p>
             <p>Vegetarian Toppings: <span class="vegetarianPrice"></span></p>
-            <p>Total Price: <span class="totalPrice"></span></p>
-            <p>Grand Total: <span class="grandTotalPrice"></span></p>
+            <p>Pizza Price: <span class="totalPrice"></span></p>
             <div id="buttons">
             </div>
           </div>
+          <h3>Grand Total: <span class="grandTotalPrice"></span></h3>
         </div>
       </div>
     </div>

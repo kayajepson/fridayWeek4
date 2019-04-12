@@ -26,17 +26,17 @@ UserCart.prototype.findPizza = function findPizza(id) {
   return false;
 }
 
-// UserCart.prototype.deletePizza = function deletePizza(id) {
-//   for (var i=0; i < this.pizzas.length; i++) {
-//     if (this.pizzas[i]){
-//       if (this.pizzas[i].id == id) {
-//         delete this.pizzas[i];
-//         return true;
-//       }
-//     }
-//   };
-//   return false;
-// }
+UserCart.prototype.deletePizza = function deletePizza(id) {
+  for (var i=0; i < this.pizzas.length; i++) {
+    if (this.pizzas[i]){
+      if (this.pizzas[i].id == id) {
+        delete this.pizzas[i];
+        return true;
+      }
+    }
+  };
+  return false;
+}
 
 UserCart.prototype.cartTotal = function cartTotal() {
   for (var i = 0; i <= this.pizzas.length -1; i++) {
@@ -84,13 +84,12 @@ function displayPizzaDetails(userCartToDisplay) {
 function showPizza(pizzaId) {
   var pizza = userCart.findPizza(pizzaId);
   $("#show-pizza").show();
-  $(".pizzaName").html(pizza.pizzaName);
-  $(".meatPrice").html(pizza.meatPrice);
-  $(".veggiePrice").html(pizza.veggiePrice);
-  $(".vegetarianPrice").html(pizza.vegetarianPrice);
-  $(".pizzaSize").html(pizza.pizzaSize);
-  $(".totalPrice").html(pizza.totalPrice);
-  $(".grandTotalPrice").html(userCart.grandTotal);
+  $(".meatPrice").html("$" + pizza.meatPrice);
+  $(".veggiePrice").html("$" + pizza.veggiePrice);
+  $(".vegetarianPrice").html("$" + pizza.vegetarianPrice);
+  $(".pizzaSize").html("$" + pizza.pizzaSize);
+  $(".totalPrice").html("$" + pizza.totalPrice);
+  $(".grandTotalPrice").html("$" + userCart.grandTotal);
   var buttons = $('#buttons');
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" + pizza.id + ">Delete</button>");
