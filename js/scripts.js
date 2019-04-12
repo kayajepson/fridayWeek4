@@ -26,24 +26,24 @@ UserCart.prototype.findPizza = function findPizza(id) {
   return false;
 }
 
-UserCart.prototype.deletePizza = function deletePizza(id) {
-  for (var i=0; i < this.pizzas.length; i++) {
-    if (this.pizzas[i]){
-      if (this.pizzas[i].id == id) {
-        delete this.pizzas[i];
-        return true;
-      }
-    }
-  };
-  return false;
-}
+// UserCart.prototype.deletePizza = function deletePizza(id) {
+//   for (var i=0; i < this.pizzas.length; i++) {
+//     if (this.pizzas[i]){
+//       if (this.pizzas[i].id == id) {
+//         delete this.pizzas[i];
+//         return true;
+//       }
+//     }
+//   };
+//   return false;
+// }
 
-UserCart.prototype.grandTotal = function grandTotal() {
-  this.grandTotal = 0
-  for (var i = 0; i < pizzas.length; i++) {
-    this.grandTotal += pizzas[i].finalPrice();
+UserCart.prototype.cartTotal = function cartTotal() {
+  for (var i = 0; i <= this.pizzas.length -1; i++) {
+    if (this.pizzas[i]) {
+      this.grandTotal += this.pizzas[i].finalPrice();
+    }
   }
-  console.log(this.grandTotal);
   return this.grandTotal;
 }
 
@@ -70,10 +70,8 @@ function Pizza(meatPrice, veggiePrice, vegetarianPrice, pizzaSize, pizzaName, to
    return this.totalPrice;
  }
 
-
 // User Interface Logic ---------
 var userCart = new UserCart();
-
 function displayPizzaDetails(userCartToDisplay) {
   var pizzaList = $("ul#pizzas");
   var htmlForPizzaInfo = "";
@@ -92,8 +90,7 @@ function showPizza(pizzaId) {
   $(".vegetarianPrice").html(pizza.vegetarianPrice);
   $(".pizzaSize").html(pizza.pizzaSize);
   $(".totalPrice").html(pizza.totalPrice);
-  $(".grandTotalPrice").html(userCart.grandTotalPrice);
-  console.log(pizza.totalPrice);
+  $(".grandTotalPrice").html(userCart.grandTotal);
   var buttons = $('#buttons');
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" + pizza.id + ">Delete</button>");
@@ -126,12 +123,6 @@ $(document).ready(function() {
     var totalPrice = (newPizza.finalPrice());
     userCart.addPizza(newPizza);
     displayPizzaDetails(userCart);
-    var grandTotal = (userCart.grandTotal());
-
-    // $("input#meat-topping-name").val("");
-    // $("input#veggie-topping-name").val("");
-    // $("input#vegetarian-topping-name").val("");
-    // $("input#new-pizza-size").val("");
-    // $("input#new-pizzaName").val("");
+    var grandTotal = (userCart.cartTotal());
   })
   });

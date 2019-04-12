@@ -15,23 +15,50 @@
   color: #FFFFFF;
 }
 
+html {
+  scroll-behavior: smooth;
+ }
+
 body {
   background-color: #000000;
-  font-family: 'Anton', sans-serif;
-}
-
-.jumbotron {
-  background-image: url("../img/pizzaSm.jpg");
-  background-color: #FFFFFF;
-  opacity: 0.95;
-  min-height: 50%;
-  -webkit-background-size: cover;
-  background-size: cover;
-  padding: 5%;
   font-family: 'Anton', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
   color: #FFFFFF;
   font-family: 'Anton', sans-serif;
+}
+
+
+body, html {
+  height: 100%;
+}
+
+#orderButton {
+  margin-top: 25%;
+  font-size: 30px;
+}
+
+.btn-danger {
+  margin-bottom: 15%;
+}
+.parallax {
+  /* The image used */
+  background-image: url("../img/pizzaSm.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Create the parallax scrolling effect */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Turn off parallax scrolling for all tablets and phones. Increase/decrease the pixels if needed */
+@media screen and (max-device-width: 860px) {
+  .parallax {
+    background-attachment: scroll;
+  }
 }
