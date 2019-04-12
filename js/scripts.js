@@ -117,7 +117,7 @@ $(document).ready(function() {
     var veggies = parseInt($("#veggies").val());
     var vegetarian = parseInt($("#vegetarian").val());
     var pizzaSize = parseInt($("input:radio[name=pizzaSize]:checked").val());
-    var pizzaName = $("input#new-pizzaName").val();
+    var pizzaName = $("input#new-pizzaName").val() || "Pizza";
     var newPizza = new Pizza(meat, veggies, vegetarian, pizzaSize, pizzaName, totalPrice);
     var totalPrice = (newPizza.finalPrice());
     userCart.addPizza(newPizza);
