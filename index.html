@@ -16,33 +16,22 @@
           <hr>
           <h2>Select your toppings:</h2>
           <form id="new-pizza">
-            <div id="new-topping-name">
-              <h4>Select a Movie</h4>
-              <div class="radio">
-                <label>
-                  <input type="radio" name="toppingName" value="1">
-                  Pepperoni
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" name="toppingName" value="1">
-                  Jalapenos
-                </label>
-              </div>
-              <div class="radio">
-                <label>
-                  <input type="radio" name="toppingName" value="1">
-                  Cheese
-                </label>
-              </div>
-              <div class="radio">
-                <label id="lego">
-                  <input type="radio" name="toppingName" value="1">
-                  Onions
-                </label>
-              </div>
-            </div>
+            <select class="form-control" id="meat">
+              <option value="1">Pepperoni</option>
+              <option value="1">Chicken</option>
+              <option value="2">Anchovies</option>
+              <option value="2">Bacon</option>
+            </select>
+            <select class="form-control" id="veggies">
+              <option value="1">Jalapenos</option>
+              <option value="1">Onions</option>
+              <option value="1">Pineapple</option>
+              <option value="2">Basil</option>
+            </select>
+            <select class="form-control" id="vegan">
+              <option value="1">Tofu</option>
+              <option value="2">Veggie Sausage</option>
+            </select>
             <div id="new-pizza-size">
               <h4>Select your size</h4>
               <div class="radio">

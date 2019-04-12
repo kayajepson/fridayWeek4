@@ -82,13 +82,18 @@ $(document).ready(function() {
     $("#hidden").show();
   });
 
-  $("form#new-pizza").submit(function(event) {
+
+  $("form#new-pizza").submit(function(event){
+    var beverage = parseInt($("#beverage").val());
+    console.log(beverage);
     event.preventDefault();
+    $("#work-responses").show();
     var inputtedToppingName = parseInt($("input:radio[name=toppingName]:checked").val());
     console.log($("#lego").text());
     var inputtedPizzaSize = parseInt($("input:radio[name=pizzaSize]:checked").val());
     var inputtedUserName = parseInt($("input#new-user-age").val());
-    $("input#new-topping-name").val("");
+    $("input#meat-topping-name").val("");
+    $("input#veggie-topping-name").val("");
     $("input#new-pizza-size").val("");
     $("input#new-user-age").val("");
     var newPizza = new Pizza(inputtedToppingName, inputtedPizzaSize, inputtedUserName);
@@ -107,4 +112,4 @@ $(document).ready(function() {
     }
     console.log(total);
   })
-})
+  });
