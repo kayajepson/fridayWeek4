@@ -42,49 +42,62 @@ UserCart.prototype.deletePizza = function(id) {
 UserCart.prototype.grandTotal = function () {
   var total = 0;
   for (var i = 0; i < pizzas.length; i++) {
-    total += pizzas[i].price()
+    total += pizzas[i].finalPrice()
   }
   return total;
 }
 
 //Business Logic for pizzas -----
-function Pizza(meatPrice, veggiePrice, vegetarianPrice, pizzaSize, pizzaName) {
+function Pizza(meatPrice, veggiePrice, vegetarianPrice, pizzaSize, pizzaName, totalPrice) {
   this.meatPrice = meatPrice,
   this.veggiePrice = veggiePrice,
   this.vegetarianPrice = vegetarianPrice,
   this.pizzaSize = pizzaSize,
-  this.pizzaName = pizzaName
+  this.pizzaName = pizzaName,
+  this.totalPrice = totalPrice
 }
+
+ // Pizza.prototype.finalPrice = function () {
+ //   var pizzaBasePrice = 10;
+ //   var total = 0;
+ //   for (var i = 0; i <= userCart.pizzas.length - 1; i++) {
+ //     // var pizza = userCart.pizzas[i]
+ //     // total += pizzaBasePrice
+ //     // total += pizza.meatPrice
+ //     // total += pizza.veggiePrice
+ //     // total += pizza.vegetarianPrice
+ //     // total += pizza.pizzaSize
+ //
+ //     pizzaBasePrice += (userCart.pizzas[i].meatPrice);
+ //     pizzaBasePrice += (userCart.pizzas[i].veggiePrice);
+ //     pizzaBasePrice += (userCart.pizzas[i].vegetarianPrice);
+ //     pizzaBasePrice += (userCart.pizzas[i].pizzaSize);
+ //     total += pizzaBasePrice;
+ //     pizzaBasePrice = 10;
+ //
+ //   // var total = 10;
+ //   // for (var i = 0; i <= userCart.pizzas.length - 1; i++) {
+ //   //   total += (userCart.pizzas[i].meatPrice);
+ //   //   total += (userCart.pizzas[i].veggiePrice);
+ //   //   total += (userCart.pizzas[i].vegetarianPrice);
+ //   //   total += (userCart.pizzas[i].pizzaSize);
+ //   //   return total;
+ //   }
+ //   return total;
+ // }
 
  Pizza.prototype.finalPrice = function () {
    var pizzaBasePrice = 10;
-   var total = 0;
-   for (var i = 0; i <= userCart.pizzas.length - 1; i++) {
-     // var pizza = userCart.pizzas[i]
-     // total += pizzaBasePrice
-     // total += pizza.meatPrice
-     // total += pizza.veggiePrice
-     // total += pizza.vegetarianPrice
-     // total += pizza.pizzaSize
-
-     pizzaBasePrice += (userCart.pizzas[i].meatPrice);
-     pizzaBasePrice += (userCart.pizzas[i].veggiePrice);
-     pizzaBasePrice += (userCart.pizzas[i].vegetarianPrice);
-     pizzaBasePrice += (userCart.pizzas[i].pizzaSize);
-     total += pizzaBasePrice;
-     pizzaBasePrice = 10;
-
-   // var total = 10;
-   // for (var i = 0; i <= userCart.pizzas.length - 1; i++) {
-   //   total += (userCart.pizzas[i].meatPrice);
-   //   total += (userCart.pizzas[i].veggiePrice);
-   //   total += (userCart.pizzas[i].vegetarianPrice);
-   //   total += (userCart.pizzas[i].pizzaSize);
-   //   return total;
-   }
-   return total;
+   this.totalPrice = 0;
+   pizzaBasePrice += (this.meatPrice);
+   pizzaBasePrice += (this.veggiePrice);
+   pizzaBasePrice += (this.vegetarianPrice);
+   pizzaBasePrice += (this.pizzaSize);
+   this.totalPrice += pizzaBasePrice;
+   pizzaBasePrice = 10;
+   console.log(this.totalPrice);
+   return this.totalPrice;
  }
-
 
 
 // User Interface Logic ---------
@@ -107,7 +120,8 @@ function showPizza(pizzaId) {
   $(".veggiePrice").html(pizza.veggiePrice);
   $(".vegetarianPrice").html(pizza.vegetarianPrice);
   $(".pizzaSize").html(pizza.pizzaSize);
-  $(".totalPrice").html(pizza.finalPrice);
+  $(".totalPrice").html(pizza.totalPrice);
+  console.log(pizza.totalPrice);
   var buttons = $('#buttons');
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" + pizza.id + ">Delete</button>");
@@ -136,7 +150,7 @@ $(document).ready(function() {
     var vegetarian = parseInt($("#vegetarian").val());
     var pizzaSize = parseInt($("input:radio[name=pizzaSize]:checked").val());
     var pizzaName = $("input#new-pizzaName").val();
-    var newPizza = new Pizza(meat, veggies, vegetarian, pizzaSize, pizzaName);
+    var newPizza = new Pizza(meat, veggies, vegetarian, pizzaSize, pizzaName, totalPrice);
     var totalPrice = (newPizza.finalPrice());
     userCart.addPizza(newPizza);
     displayPizzaDetails(userCart);
