@@ -1,20 +1,21 @@
 //Business Logic for userCart -------
 function UserCart() {
   this.pizzas = [],
-  this.currentId = 0
+  this.currentId = 0,
+  this.grandTotal = 0
 }
 
-UserCart.prototype.addPizza = function(pizza) {
+UserCart.prototype.addPizza = function addPizza(pizza) {
   pizza.id = this.assignId();
   this.pizzas.push(pizza);
 }
 
-UserCart.prototype.assignId = function() {
+UserCart.prototype.assignId = function assignId() {
   this.currentId +=1;
   return this.currentId;
 }
 
-UserCart.prototype.findPizza = function(id) {
+UserCart.prototype.findPizza = function findPizza(id) {
   for (var i=0; i< this.pizzas.length; i++) {
     if (this.pizzas[i]){
       if (this.pizzas[i].id == id) {
@@ -25,8 +26,8 @@ UserCart.prototype.findPizza = function(id) {
   return false;
 }
 
-UserCart.prototype.deletePizza = function(id) {
-  for (var i=0; i< this.pizzas.length; i++) {
+UserCart.prototype.deletePizza = function deletePizza(id) {
+  for (var i=0; i < this.pizzas.length; i++) {
     if (this.pizzas[i]){
       if (this.pizzas[i].id == id) {
         delete this.pizzas[i];
@@ -37,14 +38,13 @@ UserCart.prototype.deletePizza = function(id) {
   return false;
 }
 
-
-
-UserCart.prototype.grandTotal = function () {
-  var total = 0;
+UserCart.prototype.grandTotal = function grandTotal() {
+  this.grandTotal = 0
   for (var i = 0; i < pizzas.length; i++) {
-    total += pizzas[i].finalPrice()
+    this.grandTotal += pizzas[i].finalPrice();
   }
-  return total;
+  console.log(this.grandTotal);
+  return this.grandTotal;
 }
 
 //Business Logic for pizzas -----
@@ -57,36 +57,7 @@ function Pizza(meatPrice, veggiePrice, vegetarianPrice, pizzaSize, pizzaName, to
   this.totalPrice = totalPrice
 }
 
- // Pizza.prototype.finalPrice = function () {
- //   var pizzaBasePrice = 10;
- //   var total = 0;
- //   for (var i = 0; i <= userCart.pizzas.length - 1; i++) {
- //     // var pizza = userCart.pizzas[i]
- //     // total += pizzaBasePrice
- //     // total += pizza.meatPrice
- //     // total += pizza.veggiePrice
- //     // total += pizza.vegetarianPrice
- //     // total += pizza.pizzaSize
- //
- //     pizzaBasePrice += (userCart.pizzas[i].meatPrice);
- //     pizzaBasePrice += (userCart.pizzas[i].veggiePrice);
- //     pizzaBasePrice += (userCart.pizzas[i].vegetarianPrice);
- //     pizzaBasePrice += (userCart.pizzas[i].pizzaSize);
- //     total += pizzaBasePrice;
- //     pizzaBasePrice = 10;
- //
- //   // var total = 10;
- //   // for (var i = 0; i <= userCart.pizzas.length - 1; i++) {
- //   //   total += (userCart.pizzas[i].meatPrice);
- //   //   total += (userCart.pizzas[i].veggiePrice);
- //   //   total += (userCart.pizzas[i].vegetarianPrice);
- //   //   total += (userCart.pizzas[i].pizzaSize);
- //   //   return total;
- //   }
- //   return total;
- // }
-
- Pizza.prototype.finalPrice = function () {
+ Pizza.prototype.finalPrice = function finalPrice() {
    var pizzaBasePrice = 10;
    this.totalPrice = 0;
    pizzaBasePrice += (this.meatPrice);
@@ -121,6 +92,7 @@ function showPizza(pizzaId) {
   $(".vegetarianPrice").html(pizza.vegetarianPrice);
   $(".pizzaSize").html(pizza.pizzaSize);
   $(".totalPrice").html(pizza.totalPrice);
+  $(".grandTotalPrice").html(userCart.grandTotalPrice);
   console.log(pizza.totalPrice);
   var buttons = $('#buttons');
   buttons.empty();
@@ -154,6 +126,8 @@ $(document).ready(function() {
     var totalPrice = (newPizza.finalPrice());
     userCart.addPizza(newPizza);
     displayPizzaDetails(userCart);
+    var grandTotal = (userCart.grandTotal());
+
     // $("input#meat-topping-name").val("");
     // $("input#veggie-topping-name").val("");
     // $("input#vegetarian-topping-name").val("");
