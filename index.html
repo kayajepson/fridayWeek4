@@ -16,21 +16,27 @@
           <hr>
           <h2>Select your toppings:</h2>
           <form id="new-pizza">
+            <h4>Meat:</h4>
             <select class="form-control" id="meat">
+              <option value="0">None</option>
               <option value="1">Pepperoni</option>
               <option value="1">Chicken</option>
               <option value="2">Anchovies</option>
               <option value="2">Bacon</option>
             </select>
+            <h4>Veggies:</h4>
             <select class="form-control" id="veggies">
+              <option value="0">None</option>
               <option value="1">Jalapenos</option>
               <option value="1">Onions</option>
               <option value="1">Pineapple</option>
               <option value="2">Basil</option>
             </select>
-            <select class="form-control" id="vegan">
-              <option value="1">Tofu</option>
+            <h4>Vegan:</h4>
+            <select class="form-control" id="vegetarian">
+              <option value="0">None</option>
               <option value="2">Veggie Sausage</option>
+              <option value="2">Tofu</option>
             </select>
             <div id="new-pizza-size">
               <h4>Select your size</h4>
@@ -48,8 +54,8 @@
               </div>
             </div>
             <div class="form-group">
-              <label for="new-user-age">User Age</label>
-              <input type="number"  class="form-control" id="new-user-age">
+              <label for="new-userName">User Name</label>
+              <input type="text"  class="form-control" id="new-userName">
             </div>
             <button type="submit" class="btn-primary">Add to Cart</button>
           </form>
@@ -60,9 +66,11 @@
         </div>
         <div class="col-md-6">
           <div id="show-pizza">
-            <p>Toppings: <span class="topping-name"></span></p>
-            <p>Size: <span class="pizza-size"></span></p>
-            <p>User Age: <span class="user-age"></span></p>
+            <p>Meats: <span class="meatPrice"></span></p>
+            <p>Veggies: <span class="veggiePrice"></span></p>
+            <p>Vegetarian Toppings: <span class="vegetarianPrice"></span></p>
+            <p>Size: <span class="pizzaSize"></span></p>
+            <p>User Name: <span class="userName"></span></p>
             <div id="buttons">
             </div>
           </div>

@@ -38,11 +38,15 @@ UserCart.prototype.deletePizza = function(id) {
 }
 
 //Business Logic for pizzas -----
-function Pizza(toppingName, pizzaSize, userName) {
-  this.toppingName = toppingName,
+function Pizza(meatPrice, veggiePrice, vegetarianPrice, pizzaSize, userName) {
+  this.meatPrice = meatPrice,
+  this.veggiePrice = veggiePrice,
+  this.vegetarianPrice = vegetarianPrice,
   this.pizzaSize = pizzaSize,
   this.userName = userName
 }
+
+
 // User Interface Logic ---------
 var userCart = new UserCart();
 
@@ -50,7 +54,7 @@ function displayPizzaDetails(userCartToDisplay) {
   var pizzaList = $("ul#pizzas");
   var htmlForPizzaInfo = "";
   userCartToDisplay.pizzas.forEach(function(pizza){
-    htmlForPizzaInfo += "<li id=" + pizza.id + ">" + pizza.toppingName + " " + pizza.pizzaSize + "</li>";
+    htmlForPizzaInfo += "<li id=" + pizza.id + ">" + pizza.meatPrice + " " + pizza.veggiePrice + " " + pizza.vegetarianPrice + " " +  pizza.pizzaSize + "</li>";
   });
   pizzaList.html(htmlForPizzaInfo);
 };
@@ -58,8 +62,11 @@ function displayPizzaDetails(userCartToDisplay) {
 function showPizza(pizzaId) {
   var pizza = userCart.findPizza(pizzaId);
   $("#show-pizza").show();
-  $(".topping-name").html(pizza.toppingName);
-  $(".pizza-size").html(pizza.pizzaSize);
+  $(".meatPrice").html(pizza.meatPrice);
+  $(".veggiePrice").html(pizza.veggiePrice);
+  $(".vegetarianPrice").html(pizza.vegetarianPrice);
+  $(".pizzaSize").html(pizza.pizzaSize);
+  $(".userName").html(pizza.userName);
   var buttons = $('#buttons');
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" + pizza.id + ">Delete</button>");
@@ -67,9 +74,9 @@ function showPizza(pizzaId) {
 
 function attachListeners() {
   $("#pizzas").on("click", "li", function() {
-    showPizza (this.id);
+    showPizza(this.id);
   });
-  $("#pizzas").on("click", ".deleteButton", function() {
+  $("#buttons").on("click", ".deleteButton", function() {
     userCart.deletePizza(this.id);
     $("#show-pizza").hide();
     displayPizzaDetails(userCart);
@@ -82,30 +89,30 @@ $(document).ready(function() {
     $("#hidden").show();
   });
 
-
   $("form#new-pizza").submit(function(event){
-    var beverage = parseInt($("#beverage").val());
-    console.log(beverage);
     event.preventDefault();
-    $("#work-responses").show();
-    var inputtedToppingName = parseInt($("input:radio[name=toppingName]:checked").val());
-    console.log($("#lego").text());
-    var inputtedPizzaSize = parseInt($("input:radio[name=pizzaSize]:checked").val());
-    var inputtedUserName = parseInt($("input#new-user-age").val());
+    var meat = parseInt($("#meat").val());
+    var veggies = parseInt($("#veggies").val());
+    var vegetarian = parseInt($("#vegetarian").val());
+    console.log(vegetarian);
+    var pizzaSize = parseInt($("input:radio[name=pizzaSize]:checked").val());
+    var userName = $("input#new-userName").val();
+    console.log(userName);
     $("input#meat-topping-name").val("");
     $("input#veggie-topping-name").val("");
+    $("input#vegetarian-topping-name").val("");
     $("input#new-pizza-size").val("");
-    $("input#new-user-age").val("");
-    var newPizza = new Pizza(inputtedToppingName, inputtedPizzaSize, inputtedUserName);
+    $("input#new-userName").val("");
+
+    var newPizza = new Pizza(meat, veggies, vegetarian, pizzaSize, userName);
     var pizzaBasePrice = 10;
     var total = 0;
     userCart.addPizza(newPizza);
     displayPizzaDetails(userCart);
     for (var i = 0; i <= userCart.pizzas.length - 1; i++) {
-      // if (userCart.pizzas[i].userName > 65) {
-      //   pizzaBasePrice -= 3;
-      // }
-      pizzaBasePrice += (userCart.pizzas[i].toppingName);
+      pizzaBasePrice += (userCart.pizzas[i].meatPrice);
+      pizzaBasePrice += (userCart.pizzas[i].veggiePrice);
+      pizzaBasePrice += (userCart.pizzas[i].vegetarianPrice);
       pizzaBasePrice += (userCart.pizzas[i].pizzaSize);
       total += pizzaBasePrice;
       pizzaBasePrice = 10;
