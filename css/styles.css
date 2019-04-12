@@ -1,7 +1,37 @@
 #show-pizza {
   display: none;
+  font-family: 'Anton', sans-serif;
+  color: #FFFFFF;
 }
 
 #hidden {
   display: none;
+  font-family: 'Anton', sans-serif;
+  color: #FFFFFF;
+}
+
+#pizzas {
+  font-family: 'Anton', sans-serif;
+  color: #FFFFFF;
+}
+
+body {
+  background-color: #000000;
+  font-family: 'Anton', sans-serif;
+}
+
+.jumbotron {
+  background-image: url("../img/pizzaSm.jpg");
+  background-color: #FFFFFF;
+  opacity: 0.95;
+  min-height: 50%;
+  -webkit-background-size: cover;
+  background-size: cover;
+  padding: 5%;
+  font-family: 'Anton', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #FFFFFF;
+  font-family: 'Anton', sans-serif;
 }

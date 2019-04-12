@@ -5,16 +5,21 @@
     <link href="css/styles.css" rel="stylesheet" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/scripts.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
     <title>Lil Meeko's Pizza</title>
     <title></title>
   </head>
   <body>
+    <div class="jumbotron">
+      <h1 class="display-4">Lil Meeko's Pizza</h1>
+      <p class="lead">------------------------------------</p>
+    </div>
     <div class="container">
-      <h1>Order Here</h1>
+      <h1>// ORDER HERE //</h1>
       <div class="row">
         <div class="col-md-6">
           <hr>
-          <h2>Select your toppings:</h2>
+          <h2>SELECT YOUR TOPPINGS:</h2>
           <form id="new-pizza">
             <h4>Meat:</h4>
             <select class="form-control" id="meat">
@@ -24,6 +29,7 @@
               <option value="2">Anchovies</option>
               <option value="2">Bacon</option>
             </select>
+            <hr>
             <h4>Veggies:</h4>
             <select class="form-control" id="veggies">
               <option value="0">None</option>
@@ -32,6 +38,7 @@
               <option value="1">Pineapple</option>
               <option value="2">Basil</option>
             </select>
+            <hr>
             <h4>Vegan:</h4>
             <select class="form-control" id="vegetarian">
               <option value="0">None</option>
@@ -39,25 +46,27 @@
               <option value="2">Tofu</option>
             </select>
             <div id="new-pizza-size">
-              <h4>Select your size</h4>
+              <hr>
+              <h2>SELECT YOUR SIZE:</h2>
               <div class="radio">
-                <label>
+                <label style="color:#ffffff;">
                   <input type="radio" name="pizzaSize" value="2">
                   Medium
                 </label>
               </div>
               <div class="radio">
-                <label>
+                <label style="color:#ffffff;">
                   <input type="radio" name="pizzaSize" value="3">
                   Large
                 </label>
               </div>
             </div>
+            <hr>
             <div class="form-group">
-              <label for="new-userName">User Name</label>
-              <input type="text"  class="form-control" id="new-userName">
+              <label for="new-userName" style="color:#ffffff;">NAME YOUR PIZZA:</label>
+              <input type="text"  class="form-control" id="new-pizzaName">
             </div>
-            <button type="submit" class="btn-primary">Add to Cart</button>
+            <button type="submit" class="btn-danger">Add to Cart</button>
           </form>
           <hr>
           <h2>Tickets:</h2>
@@ -66,11 +75,11 @@
         </div>
         <div class="col-md-6">
           <div id="show-pizza">
+            <p>Pizza Name: <span class="pizzaName"></span></p>
+            <p>Size: <span class="pizzaSize"></span></p>
             <p>Meats: <span class="meatPrice"></span></p>
             <p>Veggies: <span class="veggiePrice"></span></p>
             <p>Vegetarian Toppings: <span class="vegetarianPrice"></span></p>
-            <p>Size: <span class="pizzaSize"></span></p>
-            <p>User Name: <span class="userName"></span></p>
             <div id="buttons">
             </div>
           </div>

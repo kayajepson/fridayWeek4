@@ -38,12 +38,12 @@ UserCart.prototype.deletePizza = function(id) {
 }
 
 //Business Logic for pizzas -----
-function Pizza(meatPrice, veggiePrice, vegetarianPrice, pizzaSize, userName) {
+function Pizza(meatPrice, veggiePrice, vegetarianPrice, pizzaSize, pizzaName) {
   this.meatPrice = meatPrice,
   this.veggiePrice = veggiePrice,
   this.vegetarianPrice = vegetarianPrice,
   this.pizzaSize = pizzaSize,
-  this.userName = userName
+  this.pizzaName = pizzaName
 }
 
 
@@ -54,7 +54,7 @@ function displayPizzaDetails(userCartToDisplay) {
   var pizzaList = $("ul#pizzas");
   var htmlForPizzaInfo = "";
   userCartToDisplay.pizzas.forEach(function(pizza){
-    htmlForPizzaInfo += "<li id=" + pizza.id + ">" + pizza.meatPrice + " " + pizza.veggiePrice + " " + pizza.vegetarianPrice + " " +  pizza.pizzaSize + "</li>";
+    htmlForPizzaInfo += "<li id=" + pizza.id + ">" + pizza.pizzaName + "</li>";
   });
   pizzaList.html(htmlForPizzaInfo);
 };
@@ -62,11 +62,11 @@ function displayPizzaDetails(userCartToDisplay) {
 function showPizza(pizzaId) {
   var pizza = userCart.findPizza(pizzaId);
   $("#show-pizza").show();
+  $(".pizzaName").html(pizza.pizzaName);
   $(".meatPrice").html(pizza.meatPrice);
   $(".veggiePrice").html(pizza.veggiePrice);
   $(".vegetarianPrice").html(pizza.vegetarianPrice);
   $(".pizzaSize").html(pizza.pizzaSize);
-  $(".userName").html(pizza.userName);
   var buttons = $('#buttons');
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" + pizza.id + ">Delete</button>");
@@ -96,15 +96,14 @@ $(document).ready(function() {
     var vegetarian = parseInt($("#vegetarian").val());
     console.log(vegetarian);
     var pizzaSize = parseInt($("input:radio[name=pizzaSize]:checked").val());
-    var userName = $("input#new-userName").val();
-    console.log(userName);
+    var pizzaName = $("input#new-pizzaName").val();
     $("input#meat-topping-name").val("");
     $("input#veggie-topping-name").val("");
     $("input#vegetarian-topping-name").val("");
     $("input#new-pizza-size").val("");
-    $("input#new-userName").val("");
+    $("input#new-pizzaName").val("");
 
-    var newPizza = new Pizza(meat, veggies, vegetarian, pizzaSize, userName);
+    var newPizza = new Pizza(meat, veggies, vegetarian, pizzaSize, pizzaName);
     var pizzaBasePrice = 10;
     var total = 0;
     userCart.addPizza(newPizza);
