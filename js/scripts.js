@@ -38,24 +38,26 @@ UserCart.prototype.deletePizza = function(id) {
 }
 
 //Business Logic for pizzas -----
-function Pizza(meatPrice, veggiePrice, vegetarianPrice, pizzaSize, pizzaName) {
+function Pizza(meatPrice, veggiePrice, vegetarianPrice, pizzaSize, pizzaName, totalPrice) {
   this.meatPrice = meatPrice,
   this.veggiePrice = veggiePrice,
   this.vegetarianPrice = vegetarianPrice,
   this.pizzaSize = pizzaSize,
   this.pizzaName = pizzaName
+  this.totalPrice = totalPrice
 }
 
  Pizza.prototype.finalPrice = function () {
    var pizzaBasePrice = 10;
    var total = 0;
-   for (var i = 0; i <= userCart.pizzas.length - 1; i++) {
+   for (var i = 0; i < userCart.pizzas.length - 1; i++) {
      pizzaBasePrice += (userCart.pizzas[i].meatPrice);
      pizzaBasePrice += (userCart.pizzas[i].veggiePrice);
      pizzaBasePrice += (userCart.pizzas[i].vegetarianPrice);
      pizzaBasePrice += (userCart.pizzas[i].pizzaSize);
      total += pizzaBasePrice;
      pizzaBasePrice = 10;
+     return total;
    }
  }
 
@@ -80,6 +82,7 @@ function showPizza(pizzaId) {
   $(".veggiePrice").html(pizza.veggiePrice);
   $(".vegetarianPrice").html(pizza.vegetarianPrice);
   $(".pizzaSize").html(pizza.pizzaSize);
+  $(".totalPrice").html(pizza.totalPrice);
   var buttons = $('#buttons');
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" + pizza.id + ">Delete</button>");
@@ -104,21 +107,26 @@ $(document).ready(function() {
 
   $("form#new-pizza").submit(function(event){
     event.preventDefault();
+    var totalPrice = 0;
     var meat = parseInt($("#meat").val());
     var veggies = parseInt($("#veggies").val());
     var vegetarian = parseInt($("#vegetarian").val());
-    console.log(vegetarian);
     var pizzaSize = parseInt($("input:radio[name=pizzaSize]:checked").val());
     var pizzaName = $("input#new-pizzaName").val();
+    var totalPrice = newPizza.finalPrice();
+    console.log(totalPrice);
     $("input#meat-topping-name").val("");
     $("input#veggie-topping-name").val("");
     $("input#vegetarian-topping-name").val("");
     $("input#new-pizza-size").val("");
     $("input#new-pizzaName").val("");
-
-    var newPizza = new Pizza(meat, veggies, vegetarian, pizzaSize, pizzaName);
+    var newPizza = new Pizza(meat, veggies, vegetarian, pizzaSize, pizzaName, totalPrice);
     userCart.addPizza(newPizza);
     displayPizzaDetails(userCart);
+    // var totalPrice = newPizza.finalPrice();
+    // console.log(totalPrice);
+
+
     // var pizzaBasePrice = 10;
     // var total = 0;
     // userCart.addPizza(newPizza);
