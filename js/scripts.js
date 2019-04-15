@@ -39,6 +39,7 @@ UserCart.prototype.deletePizza = function deletePizza(id) {
 }
 
 UserCart.prototype.cartTotal = function cartTotal() {
+  this.grandTotal = 0;
   for (var i = 0; i <= this.pizzas.length -1; i++) {
     if (this.pizzas[i]) {
       this.grandTotal += this.pizzas[i].finalPrice();
@@ -48,13 +49,12 @@ UserCart.prototype.cartTotal = function cartTotal() {
 }
 
 //Business Logic for pizzas -----
-function Pizza(meatPrice, veggiePrice, vegetarianPrice, pizzaSize, pizzaName, totalPrice) {
+function Pizza(meatPrice, veggiePrice, vegetarianPrice, pizzaSize, pizzaName) {
   this.meatPrice = meatPrice,
   this.veggiePrice = veggiePrice,
   this.vegetarianPrice = vegetarianPrice,
   this.pizzaSize = pizzaSize,
-  this.pizzaName = pizzaName,
-  this.totalPrice = totalPrice
+  this.pizzaName = pizzaName
 }
 
  Pizza.prototype.finalPrice = function finalPrice() {
@@ -65,8 +65,6 @@ function Pizza(meatPrice, veggiePrice, vegetarianPrice, pizzaSize, pizzaName, to
    pizzaBasePrice += (this.vegetarianPrice);
    pizzaBasePrice += (this.pizzaSize);
    this.totalPrice += pizzaBasePrice;
-   pizzaBasePrice = 10;
-   console.log(this.totalPrice);
    return this.totalPrice;
  }
 
@@ -79,6 +77,7 @@ function displayPizzaDetails(userCartToDisplay) {
     htmlForPizzaInfo += "<li id=" + pizza.id + ">" + pizza.pizzaName + "</li>";
   });
   pizzaList.html(htmlForPizzaInfo);
+  $(".grandTotalPrice").html("$" + userCart.cartTotal());
 };
 
 function showPizza(pizzaId) {
@@ -88,8 +87,7 @@ function showPizza(pizzaId) {
   $(".veggiePrice").html("$" + pizza.veggiePrice);
   $(".vegetarianPrice").html("$" + pizza.vegetarianPrice);
   $(".pizzaSize").html("$" + pizza.pizzaSize);
-  $(".totalPrice").html("$" + pizza.totalPrice);
-  $(".grandTotalPrice").html("$" + userCart.grandTotal);
+  $(".totalPrice").html("$" + pizza.finalPrice());
   var buttons = $('#buttons');
   buttons.empty();
   buttons.append("<button class='deleteButton' id=" + pizza.id + ">Delete</button>");
@@ -118,10 +116,8 @@ $(document).ready(function() {
     var vegetarian = parseInt($("#vegetarian").val());
     var pizzaSize = parseInt($("input:radio[name=pizzaSize]:checked").val());
     var pizzaName = $("input#new-pizzaName").val() || "Pizza";
-    var newPizza = new Pizza(meat, veggies, vegetarian, pizzaSize, pizzaName, totalPrice);
-    var totalPrice = (newPizza.finalPrice());
+    var newPizza = new Pizza(meat, veggies, vegetarian, pizzaSize, pizzaName);
     userCart.addPizza(newPizza);
     displayPizzaDetails(userCart);
-    var grandTotal = (userCart.cartTotal());
   })
   });
